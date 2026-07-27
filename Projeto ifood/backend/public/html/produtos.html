@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Produtos - Bocão</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>Cadastro de Produtos</h1>
+
+
+<div class="form">
+
+
+<input 
+id="nome"
+placeholder="Nome do produto">
+
+
+<input 
+id="descricao"
+placeholder="Descrição">
+
+
+<input 
+id="categoria"
+placeholder="Categoria">
+
+
+<input 
+id="preco"
+type="number"
+placeholder="Preço">
+
+
+<button onclick="cadastrarProduto()">
+Cadastrar
+</button>
+
+
+</div>
+
+
+
+<h2>Produtos cadastrados</h2>
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Nome</th>
+<th>Categoria</th>
+<th>Preço</th>
+<th>Ação</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="listaProdutos">
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+
+<script src="../js/produtos.js"></script>
+
+
+</body>
+
+</html>

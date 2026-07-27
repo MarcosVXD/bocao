@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Abertura de Pedido - Bocão</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>Abertura de Pedido</h1>
+
+
+
+<label>
+Senha do cliente
+</label>
+
+<input 
+id="senha_cliente"
+placeholder="Ex: 25">
+
+
+
+<label>
+Produto
+</label>
+
+<select id="produto">
+
+</select>
+
+
+
+<label>
+Quantidade
+</label>
+
+<input 
+id="quantidade"
+type="number"
+value="1">
+
+
+
+<label>
+Observação
+</label>
+
+<textarea 
+id="observacao"
+placeholder="Ex: sem cebola">
+
+</textarea>
+
+
+
+<label>
+Forma de pagamento
+</label>
+
+
+<select id="pagamento">
+
+<option value="Dinheiro">
+Dinheiro
+</option>
+
+
+<option value="Cartão">
+Cartão
+</option>
+
+
+<option value="Pix">
+Pix
+</option>
+
+
+</select>
+
+
+
+<label>
+Setor
+</label>
+
+
+<select id="setor">
+
+
+<option value="Cozinha">
+Cozinha
+</option>
+
+
+<option value="Retirada">
+Retirada
+</option>
+
+
+</select>
+
+
+
+<button onclick="criarPedido()">
+
+Enviar Pedido
+
+</button>
+
+
+<p id="mensagem"></p>
+
+
+</div>
+
+
+
+<script src="../js/pedidos.js"></script>
+
+
+</body>
+
+</html>
