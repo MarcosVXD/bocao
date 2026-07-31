@@ -2,7 +2,7 @@ const API = "http://localhost:3000";
 
 
 
-// Buscar pedidos
+// Buscar pedidos para pagamento
 
 function carregarPedidos(){
 
@@ -28,24 +28,62 @@ pedido.status === "Pronto"
 ){
 
 
+
+let listaItens = "";
+
+
+
+pedido.itens.forEach(item=>{
+
+
+listaItens += `
+
+${item.nome} - ${item.quantidade}x
+
+<br>
+
+`;
+
+
+
+});
+
+
+
 tabela += `
 
 
 <tr>
 
-<td>${pedido.id}</td>
 
-<td>${pedido.senha_cliente}</td>
+<td>
+#${pedido.id}
+</td>
 
-<td>${pedido.produto}</td>
 
-<td>R$ ${pedido.valor_total}</td>
+<td>
+${pedido.senha_cliente}
+</td>
+
+
+<td>
+${listaItens}
+</td>
+
+
+<td>
+
+R$ ${pedido.valor_total.toFixed(2)}
+
+</td>
+
 
 
 <td>
 
 
 <select id="pagamento${pedido.id}">
+
 
 <option value="Dinheiro">
 Dinheiro
@@ -65,18 +103,23 @@ Pix
 </select>
 
 
+
 </td>
+
 
 
 <td>
 
+
 <button onclick="pagar(${pedido.id},${pedido.valor_total})">
 
-Finalizar
+Finalizar pagamento
 
 </button>
 
+
 </td>
+
 
 
 </tr>
@@ -84,6 +127,8 @@ Finalizar
 
 `;
 
+
+
 }
 
 
@@ -91,7 +136,7 @@ Finalizar
 
 
 
-document.getElementById("listaPedidos").innerHTML = tabela;
+document.getElementById("listaPedidos").innerHTML=tabela;
 
 
 
@@ -99,6 +144,9 @@ document.getElementById("listaPedidos").innerHTML = tabela;
 
 
 }
+
+
+
 
 
 
@@ -108,10 +156,14 @@ document.getElementById("listaPedidos").innerHTML = tabela;
 function pagar(id,valor){
 
 
+
 const forma = 
 document.getElementById("pagamento"+id).value;
 
 
+
+
+// Primeiro registra no caixa
 
 fetch(API+"/caixa",{
 
@@ -121,12 +173,15 @@ method:"POST",
 
 headers:{
 
+
 "Content-Type":"application/json"
+
 
 },
 
 
 body:JSON.stringify({
+
 
 pedido_id:id,
 
@@ -147,10 +202,48 @@ forma_pagamento:forma
 .then(()=>{
 
 
+
+// Depois finaliza o pedido
+
+return fetch(API+"/pedidos/"+id+"/status",{
+
+
+method:"PUT",
+
+
+headers:{
+
+
+"Content-Type":"application/json"
+
+
+},
+
+
+body:JSON.stringify({
+
+
+status:"Finalizado"
+
+
+})
+
+
+});
+
+
+
+})
+
+
+.then(()=>{
+
+
 alert("Pagamento registrado!");
 
 
 carregarPedidos();
+
 
 carregarHistorico();
 
@@ -159,6 +252,8 @@ carregarHistorico();
 
 
 }
+
+
 
 
 
@@ -181,6 +276,7 @@ fetch(API+"/vendas")
 let tabela="";
 
 
+
 vendas.forEach(venda=>{
 
 
@@ -188,13 +284,24 @@ tabela += `
 
 <tr>
 
-<td>${venda.id}</td>
+<td>
+${venda.id}
+</td>
 
-<td>R$ ${venda.valor}</td>
 
-<td>${venda.forma_pagamento}</td>
+<td>
+R$ ${venda.valor}
+</td>
 
-<td>${venda.data}</td>
+
+<td>
+${venda.forma_pagamento}
+</td>
+
+
+<td>
+${venda.data}
+</td>
 
 
 </tr>
@@ -202,10 +309,13 @@ tabela += `
 `;
 
 
+
 });
 
 
+
 document.getElementById("historico").innerHTML=tabela;
+
 
 
 });
@@ -216,9 +326,13 @@ document.getElementById("historico").innerHTML=tabela;
 
 
 
+
+
+
 carregarPedidos();
 
 carregarHistorico();
+
 
 
 setInterval(carregarPedidos,5000);

@@ -22,8 +22,29 @@ pedidos.forEach(pedido=>{
 
 
 if(
-pedido.status === "Pronto"
+pedido.status === "Finalizado"
 ){
+
+
+
+let listaItens = "";
+
+
+
+pedido.itens.forEach(item=>{
+
+
+listaItens += `
+
+${item.nome} - ${item.quantidade}x
+
+<br>
+
+`;
+
+
+});
+
 
 
 tabela += `
@@ -33,23 +54,35 @@ tabela += `
 
 
 <td>
+
+#${pedido.id}
+
+</td>
+
+
+
+<td>
+
 ${pedido.senha_cliente}
+
 </td>
 
 
+
 <td>
-${pedido.produto}
+
+${listaItens}
+
 </td>
 
 
-<td>
-${pedido.quantidade}
-</td>
-
 
 <td>
+
 ${pedido.status}
+
 </td>
+
 
 
 <td>
@@ -57,7 +90,7 @@ ${pedido.status}
 
 <button onclick="entregarPedido(${pedido.id})">
 
-Entregue
+Confirmar retirada
 
 </button>
 
@@ -65,15 +98,19 @@ Entregue
 </td>
 
 
+
 </tr>
 
 
 `;
 
+
+
 }
 
 
 });
+
 
 
 document.getElementById("listaPedidos").innerHTML = tabela;
@@ -84,6 +121,7 @@ document.getElementById("listaPedidos").innerHTML = tabela;
 
 
 }
+
 
 
 
@@ -100,14 +138,18 @@ method:"PUT",
 
 headers:{
 
+
 "Content-Type":"application/json"
+
 
 },
 
 
 body:JSON.stringify({
 
-status:"Finalizado"
+
+status:"Entregue"
+
 
 })
 
@@ -125,6 +167,7 @@ carregarPedidos();
 
 
 }
+
 
 
 

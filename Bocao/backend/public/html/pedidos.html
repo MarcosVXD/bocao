@@ -112,12 +112,25 @@ Retirada
 
 
 
-<button onclick="criarPedido()">
-
-Enviar Pedido
-
+<button onclick="adicionarItem()">
+Adicionar Produto
 </button>
 
+<br><br>
+
+<button onclick="criarPedido()">
+Finalizar Pedido
+</button>
+
+<hr>
+
+<h2>Itens do Pedido</h2>
+
+<div id="listaItens"></div>
+
+<h3 id="totalPedido">
+Total: R$ 0,00
+</h3>
 
 <p id="mensagem"></p>
 

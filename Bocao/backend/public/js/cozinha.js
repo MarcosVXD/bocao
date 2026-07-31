@@ -23,55 +23,109 @@ pedidos.forEach(pedido=>{
 
 if(
 pedido.setor === "Cozinha" &&
-pedido.status !== "Pronto"
+(
+pedido.status === "Recebido" ||
+pedido.status === "Em preparo"
+)
 ){
+
+
+let listaItens = "";
+
+
+pedido.itens.forEach(item=>{
+
+
+listaItens += `
+
+${item.nome} - ${item.quantidade}x
+<br>
+
+`;
+
+
+});
+
 
 
 tabela += `
 
 <tr>
 
+
 <td>
+
+#${pedido.id}
+
+</td>
+
+
+
+<td>
+
 ${pedido.senha_cliente}
+
 </td>
 
 
+
 <td>
-${pedido.produto}
+
+${listaItens}
+
 </td>
 
 
-<td>
-${pedido.quantidade}
-</td>
-
 
 <td>
+
 ${pedido.observacao}
+
 </td>
 
 
+
 <td>
+
 ${pedido.status}
+
 </td>
+
 
 
 <td>
 
 
-<button onclick="alterarStatus(${pedido.id}, 'Preparando')">
 
-Preparar
+${
+pedido.status === "Recebido"
+
+?
+
+`
+
+<button onclick="alterarStatus(${pedido.id}, 'Em preparo')">
+
+Iniciar preparo
 
 </button>
 
+`
 
+:
+
+`
 
 <button onclick="alterarStatus(${pedido.id}, 'Pronto')">
 
-Pronto
+Finalizar
 
 </button>
+
+`
+
+}
+
 
 
 </td>
@@ -82,10 +136,12 @@ Pronto
 
 `;
 
+
 }
 
 
 });
+
 
 
 document.getElementById("listaPedidos").innerHTML=tabela;
@@ -100,8 +156,12 @@ document.getElementById("listaPedidos").innerHTML=tabela;
 
 
 
+
+
 function alterarStatus(id,status){
 
+
+console.log("Alterando pedido:", id, "para", status);
 
 
 fetch(API+"/pedidos/"+id+"/status",{
@@ -129,10 +189,25 @@ status:status
 })
 
 
-.then(()=>{
+.then(res=>res.json())
+
+
+.then(data=>{
+
+
+console.log(data);
 
 
 carregarPedidos();
+
+
+})
+
+
+.catch(err=>{
+
+
+console.log("ERRO:",err);
 
 
 });
@@ -142,9 +217,11 @@ carregarPedidos();
 
 
 
+
 carregarPedidos();
 
 
-// Atualiza a cada 5 segundos
+
+// Atualiza automaticamente
 
 setInterval(carregarPedidos,5000);
