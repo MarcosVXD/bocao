@@ -527,10 +527,8 @@ id:this.lastID
 
 app.post("/pedidos",(req,res)=>{
 
-
 const {
 
-senha_cliente,
 observacao,
 forma_pagamento,
 setor,
@@ -538,11 +536,26 @@ itens
 
 }=req.body;
 
-
-
 let valor_total = 0;
 
+// Gera automaticamente a próxima senha
+db.get(
 
+"SELECT MAX(CAST(senha_cliente AS INTEGER)) AS ultima FROM pedidos",
+
+[],
+
+(err,row)=>{
+
+if(err)
+return res.status(500).json(err);
+
+const proximaSenha = (row?.ultima || 0) + 1;
+
+// Gera 001, 002, 003...
+const senha_cliente = proximaSenha
+    .toString()
+    .padStart(3, "0");
 
 db.run(
 
@@ -575,26 +588,16 @@ new Date().toISOString()
 
 ],
 
-
-
 function(err){
-
 
 if(err)
 return res.status(500).json(err);
 
-
-
 const pedido_id = this.lastID;
-
-
 
 let concluidos = 0;
 
-
-
 itens.forEach(item=>{
-
 
 db.get(
 
@@ -602,88 +605,58 @@ db.get(
 
 [item.produto_id],
 
-
 (err,produto)=>{
-
 
 if(err)
 return res.status(500).json(err);
 
-
-
-const subtotal =
-produto.preco * item.quantidade;
-
-
+const subtotal = produto.preco * item.quantidade;
 
 valor_total += subtotal;
-
-
 
 db.run(
 
 `
 INSERT INTO itens_pedido
-
 (
 pedido_id,
 produto_id,
 quantidade,
 subtotal
 )
-
 VALUES(?,?,?,?)
-
 `,
 
 [
-
 pedido_id,
-
 item.produto_id,
-
 item.quantidade,
-
 subtotal
-
 ]
 
 );
 
-
-
-
 concluidos++;
 
-
-
-
 if(concluidos === itens.length){
-
-
 
 db.run(
 
 `
 UPDATE pedidos
-
 SET valor_total=?
-
 WHERE id=?
-
 `,
 
 [
-
 valor_total,
-
 pedido_id
+],
 
-]
+(err)=>{
 
-);
-
-
+if(err)
+return res.status(500).json(err);
 
 res.json({
 
@@ -697,35 +670,23 @@ valor_total
 
 });
 
-
 }
-
-
-
-}
-
 
 );
 
-
+}
 
 });
 
+});
 
 }
 
-
-
 );
-
-
 
 });
 
-
-
-
-
+});
 
 
 // ===============================
@@ -1200,67 +1161,55 @@ res.json(row);
 
 app.delete("/limpar-pedidos",(req,res)=>{
 
+    db.serialize(()=>{
 
-db.run(
+        db.run("DELETE FROM itens_pedido");
 
-"DELETE FROM itens_pedido",
+        db.run("DELETE FROM pedidos");
 
-(err)=>{
+        // Reinicia o contador das tabelas
+        db.run("DELETE FROM sqlite_sequence WHERE name='pedidos'");
 
+        db.run("DELETE FROM sqlite_sequence WHERE name='itens_pedido'");
 
-if(err){
+        res.json({
+            mensagem:"Pedidos apagados. Senha reiniciada para 1."
+        });
 
-return res.status(500).json(err);
-
-}
-
-
-
-db.run(
-
-"DELETE FROM pedidos",
-
-(err)=>{
-
-
-if(err){
-
-return res.status(500).json(err);
-
-}
-
-
-
-res.json({
-
-mensagem:"Pedidos apagados com sucesso"
+    });
 
 });
 
 
+// ===============================
+// PRÓXIMA SENHA
+// ===============================
 
-}
+app.get("/proxima-senha", (req, res) => {
 
+    db.get(
+        "SELECT MAX(CAST(senha_cliente AS INTEGER)) AS ultima FROM pedidos",
+        [],
+        (err, row) => {
 
+            if (err) {
+                return res.status(500).json(err);
+            }
 
-);
+            let proxima = 1;
 
+            if (row && row.ultima) {
+                proxima = row.ultima + 1;
+            }
 
+            res.json({
+                senha: String(proxima).padStart(3, "0")
+            });
 
-}
-
-
-
-);
-
-
+        }
+    );
 
 });
-
-
-
-
-
 
 
 // ===============================
