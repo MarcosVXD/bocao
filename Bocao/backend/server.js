@@ -15,9 +15,7 @@ const db = new sqlite3.Database("database.db");
 
 
 
-// ===============================
-// CRIAÇÃO DO BANCO
-// ===============================
+// CRIAÇÃO DO BANCO:
 
 db.serialize(()=>{
 
@@ -163,10 +161,8 @@ VALUES
 
 
 
-// ===============================
-// LOGIN
-// ===============================
 
+// LOGIN:
 
 app.post("/login",(req,res)=>{
 
@@ -232,14 +228,86 @@ cargo:row.cargo
 });
 
 
+// CADASTRAR USUÁRIO:
+
+app.post("/usuarios",(req,res)=>{
+
+const {
+nome,
+email,
+senha,
+cargo
+}=req.body;
+
+
+db.run(
+
+`
+INSERT INTO usuarios
+(nome,email,senha,cargo)
+
+VALUES(?,?,?,?)
+`,
+
+[
+nome,
+email,
+senha,
+cargo
+],
+
+function(err){
+
+if(err)
+return res.status(500).json(err);
+
+
+res.json({
+
+mensagem:"Usuário cadastrado com sucesso",
+id:this.lastID
+
+});
+
+}
+
+);
+
+});
 
 
 
-// ===============================
-// PRODUTOS
-// ===============================
+// LISTAR USUÁRIOS:
+
+app.get("/usuarios",(req,res)=>{
+
+db.all(
+
+`
+SELECT id,nome,email,cargo
+FROM usuarios
+ORDER BY id
+`,
+
+[],
+
+(err,rows)=>{
+
+if(err)
+return res.status(500).json(err);
+
+res.json(rows);
+
+}
+
+);
+
+});
 
 
+
+
+//PRODUTOS:
 
 app.get("/produtos",(req,res)=>{
 
@@ -434,10 +502,8 @@ mensagem:"Produto excluído"
 
 });
 
-// ===============================
-// SETORES
-// ===============================
 
+// SETORES:
 
 app.get("/setores",(req,res)=>{
 
@@ -520,10 +586,8 @@ id:this.lastID
 
 
 
-// ===============================
-// PEDIDOS
-// ===============================
 
+// PEDIDOS:
 
 app.post("/pedidos",(req,res)=>{
 
@@ -689,10 +753,8 @@ valor_total
 });
 
 
-// ===============================
-// LISTAR PEDIDOS
-// ===============================
 
+// LISTAR PEDIDOS:
 
 app.get("/pedidos",(req,res)=>{
 
@@ -815,10 +877,8 @@ res.json(resultado);
 
 
 
-// ===============================
-// ALTERAR STATUS DO PEDIDO
-// ===============================
 
+// ALTERAR STATUS DO PEDIDO:
 
 app.put("/pedidos/:id/status",(req,res)=>{
 
@@ -962,10 +1022,7 @@ status:status
 
 });
 
-// ===============================
-// CAIXA
-// ===============================
-
+// CAIXA:
 
 app.post("/caixa",(req,res)=>{
 
@@ -1047,10 +1104,8 @@ id:this.lastID
 
 
 
-// ===============================
-// HISTÓRICO DE VENDAS
-// ===============================
 
+// HISTÓRICO DE VENDAS:
 
 app.get("/vendas",(req,res)=>{
 
@@ -1098,10 +1153,8 @@ res.json(rows);
 
 
 
-// ===============================
-// RELATÓRIOS
-// ===============================
 
+// RELATÓRIOS:
 
 app.get("/relatorios/vendas",(req,res)=>{
 
@@ -1154,10 +1207,8 @@ res.json(row);
 
 
 
-// ===============================
-// LIMPAR PEDIDOS TESTE
-// ===============================
 
+// LIMPAR PEDIDOS TESTE:
 
 app.delete("/limpar-pedidos",(req,res)=>{
 
@@ -1181,9 +1232,7 @@ app.delete("/limpar-pedidos",(req,res)=>{
 });
 
 
-// ===============================
-// PRÓXIMA SENHA
-// ===============================
+// PRÓXIMA SENHA:
 
 app.get("/proxima-senha", (req, res) => {
 
@@ -1212,10 +1261,8 @@ app.get("/proxima-senha", (req, res) => {
 });
 
 
-// ===============================
-// SERVIDOR
-// ===============================
 
+// SERVIDOR:
 
 app.listen(3000,()=>{
 

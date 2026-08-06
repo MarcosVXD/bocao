@@ -3,59 +3,65 @@
 
 <head>
 
-<meta charset="UTF-8">
-<title>Cozinha - Bocão</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="../css/style.css">
+    <title>Cozinha - Bocão</title>
+
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 
-
 <body>
 
+    <nav class="menu">
 
-<div class="container">
+        <a href="index.html"><button>🏠 Início</button></a>
 
+        <a href="produtos.html"><button>📦 Produtos</button></a>
 
-<h1>Painel da Cozinha</h1>
+        <a href="pedidos.html"><button>📝 Pedidos</button></a>
 
+        <a href="retirada.html"><button>🛎 Retirada</button></a>
 
-<table>
+        <a href="caixa.html"><button>💳 Caixa</button></a>
 
-<thead>
+        <a href="relatorios.html"><button>📊 Relatórios</button></a>
 
-<table>
+    </nav>
 
-<thead>
+    <div class="container fade">
 
-<tr>
+        <h1>👨‍🍳 Painel da Cozinha</h1>
 
-<th>Pedido</th>
-<th>Senha</th>
-<th>Itens</th>
-<th>Observação</th>
-<th>Status</th>
-<th>Ação</th>
+        <h2>Acompanhe todos os pedidos em preparo</h2>
 
-</tr>
+        <table>
 
-</thead>
+            <thead>
 
+                <tr>
 
-<tbody id="listaPedidos">
+                    <th>Pedido</th>
+                    <th>Senha</th>
+                    <th>Itens</th>
+                    <th>Observação</th>
+                    <th>Status</th>
+                    <th>Ação</th>
 
-</tbody>
+                </tr>
 
+            </thead>
 
-</table>
+            <tbody id="listaPedidos">
 
+            </tbody>
 
-</div>
+        </table>
 
+    </div>
 
-
-<script src="../js/cozinha.js"></script>
-
+    <script src="../js/cozinha.js"></script>
 
 </body>
 

@@ -3,86 +3,91 @@
 
 <head>
 
-<meta charset="UTF-8">
-<title>Caixa - Bocão</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="../css/style.css">
+    <title>Caixa - Bocão</title>
+
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 
-
 <body>
 
+    <nav class="menu">
 
-<div class="container">
+        <a href="index.html"><button>🏠 Início</button></a>
 
+        <a href="produtos.html"><button>📦 Produtos</button></a>
 
-<h1>Controle de Caixa</h1>
+        <a href="pedidos.html"><button>📝 Pedidos</button></a>
 
+        <a href="cozinha.html"><button>👨‍🍳 Cozinha</button></a>
 
-<h2>Pedidos para pagamento</h2>
+        <a href="retirada.html"><button>🛎 Retirada</button></a>
 
+        <a href="relatorios.html"><button>📊 Relatórios</button></a>
 
-<table>
+    </nav>
 
-<thead>
+    <div class="container fade">
 
-<tr>
+        <h1>💳 Controle de Caixa</h1>
 
-<th>Pedido</th>
-<th>Senha</th>
-<th>Itens</th>
-<th>Total</th>
-<th>Pagamento</th>
-<th>Ação</th>
+        <h2>Pedidos aguardando pagamento</h2>
 
-</tr>
+        <table>
 
-</thead>
+            <thead>
 
+                <tr>
 
-<tbody id="listaPedidos">
+                    <th>Pedido</th>
+                    <th>Senha</th>
+                    <th>Itens</th>
+                    <th>Total</th>
+                    <th>Pagamento</th>
+                    <th>Ação</th>
 
-</tbody>
+                </tr>
 
+            </thead>
 
-</table>    
+            <tbody id="listaPedidos">
 
+            </tbody>
 
-<h2>Histórico de Vendas</h2>
+        </table>
 
+        <hr>
 
-<table>
+        <h2>📈 Histórico de Vendas</h2>
 
+        <table>
 
-<thead>
+            <thead>
 
-<tr>
+                <tr>
 
-<th>ID</th>
-<th>Valor</th>
-<th>Forma</th>
-<th>Data</th>
+                    <th>ID</th>
+                    <th>Valor</th>
+                    <th>Forma de Pagamento</th>
+                    <th>Data</th>
 
-</tr>
+                </tr>
 
-</thead>
+            </thead>
 
+            <tbody id="historico">
 
-<tbody id="historico">
+            </tbody>
 
-</tbody>
+        </table>
 
+    </div>
 
-</table>
-
-
-</div>
-
-
-<script src="../js/caixa.js"></script>
-
+    <script src="../js/caixa.js"></script>
 
 </body>
 
-</html> 
+</html>

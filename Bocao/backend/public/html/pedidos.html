@@ -1,147 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-<nav class="menu">
-    <a href="dashboard.html">Início</a>
-    <a href="pedidos.html">Pedidos</a>
-    <a href="cozinha.html">Cozinha</a>
-    <a href="retirada.html">Retirada</a>
-    <a href="caixa.html">Caixa</a>
-    <a href="relatorios.html">Relatórios</a>
-    <a href="produtos.html">Produtos</a>
-    <a href="setores.html">Setores</a>
-    <a href="login.html">Sair</a>
-</nav>
-
 <head>
 
-<meta charset="UTF-8">
-<title>Abertura de Pedido - Bocão</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="../css/style.css">
+    <title>Novo Pedido - Bocão</title>
+
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 
-
 <body>
 
+    <nav class="menu">
 
-<div class="container">
+        <a href="index.html"><button>🏠 Início</button></a>
+        <a href="produtos.html"><button>📦 Produtos</button></a>
+        <a href="cozinha.html"><button>👨‍🍳 Cozinha</button></a>
+        <a href="retirada.html"><button>🛎 Retirada</button></a>
+        <a href="caixa.html"><button>💳 Caixa</button></a>
+        <a href="relatorios.html"><button>📊 Relatórios</button></a>
 
+    </nav>
 
-<h1>Abertura de Pedido</h1>
+    <div class="container fade">
 
+        <h1>📝 Novo Pedido</h1>
 
-<label>
-Produto
-</label>
+        <h2>Informações do Pedido</h2>
 
-<select id="produto">
+        <div class="form">
 
-</select>
+            <label>Produto</label>
 
+            <select id="produto">
 
+            </select>
 
-<label>
-Quantidade
-</label>
+            <label>Quantidade</label>
 
-<input 
-id="quantidade"
-type="number"
-value="1">
+            <input
+                id="quantidade"
+                type="number"
+                value="1"
+                min="1">
 
+            <label>Observações</label>
 
+            <textarea
+                id="observacao"
+                placeholder="Ex: sem cebola, molho à parte..."></textarea>
 
-<label>
-Observação
-</label>
+            <label>Forma de Pagamento</label>
 
-<textarea 
-id="observacao"
-placeholder="Ex: sem cebola">
+            <select id="pagamento">
 
-</textarea>
+                <option value="Dinheiro">💵 Dinheiro</option>
 
+                <option value="Cartão">💳 Cartão</option>
 
+                <option value="Pix">📱 Pix</option>
 
-<label>
-Forma de pagamento
-</label>
+            </select>
 
+            <label>Setor Responsável</label>
 
-<select id="pagamento">
+            <select id="setor">
 
-<option value="Dinheiro">
-Dinheiro
-</option>
+                <option value="Cozinha">👨‍🍳 Cozinha</option>
 
+                <option value="Retirada">🛎 Retirada</option>
 
-<option value="Cartão">
-Cartão
-</option>
+            </select>
 
+            <button onclick="adicionarItem()">
 
-<option value="Pix">
-Pix
-</option>
+                ➕ Adicionar Produto
 
+            </button>
 
-</select>
+        </div>
 
+        <hr>
 
+        <h2>🛒 Itens do Pedido</h2>
 
-<label>
-Setor
-</label>
+        <div id="listaItens">
 
+        </div>
 
-<select id="setor">
+        <h3 id="totalPedido">
 
+            Total: R$ 0,00
 
-<option value="Cozinha">
-Cozinha
-</option>
+        </h3>
 
+        <button onclick="criarPedido()">
 
-<option value="Retirada">
-Retirada
-</option>
+            ✅ Finalizar Pedido
 
+        </button>
 
-</select>
+        <p id="mensagem"></p>
 
+    </div>
 
-
-<button onclick="adicionarItem()">
-Adicionar Produto
-</button>
-
-<br><br>
-
-<button onclick="criarPedido()">
-Finalizar Pedido
-</button>
-
-<hr>
-
-<h2>Itens do Pedido</h2>
-
-<div id="listaItens"></div>
-
-<h3 id="totalPedido">
-Total: R$ 0,00
-</h3>
-
-<p id="mensagem"></p>
-
-
-</div>
-
-
-
-<script src="../js/pedidos.js"></script>
-
+    <script src="../js/pedidos.js"></script>
 
 </body>
 

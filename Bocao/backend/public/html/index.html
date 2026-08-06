@@ -3,112 +3,102 @@
 
 <head>
 
-<meta charset="UTF-8">
-<title>Bocão - Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="../css/style.css">
+    <title>Bocão - Dashboard</title>
+
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 
-
 <body>
 
+    <nav class="menu">
 
-<div class="container">
+        <a href="produtos.html"><button>📦 Produtos</button></a>
 
+        <a href="pedidos.html"><button>📝 Novo Pedido</button></a>
 
-<h1>
-Sistema Bocão
-</h1>
+        <a href="cozinha.html"><button>👨‍🍳 Cozinha</button></a>
 
+        <a href="retirada.html"><button>🛎 Retirada</button></a>
 
-<h2>
-Gestão de Pedidos
-</h2>
+        <a href="caixa.html"><button>💳 Caixa</button></a>
 
+        <a href="relatorios.html"><button>📊 Relatórios</button></a>
 
+    </nav>
 
-<div class="menu">
+    <div class="container fade">
 
+        <h1>🍔 Bocão</h1>
 
-<a href="produtos.html">
+        <h2>Painel de Gestão de Pedidos</h2>
 
-<button>
-📦 Produtos
-</button>
+        <div class="cards">
 
-</a>
+            <a href="produtos.html" class="card">
 
+                <h2>📦 Produtos</h2>
 
+                <p>Cadastre e gerencie os produtos.</p>
 
-<a href="pedidos.html">
+            </a>
 
-<button>
-📝 Novo Pedido
-</button>
+            <a href="pedidos.html" class="card">
 
-</a>
+                <h2>📝 Pedidos</h2>
 
+                <p>Realize novos pedidos.</p>
 
+            </a>
 
-<a href="cozinha.html">
+            <a href="cozinha.html" class="card">
 
-<button>
-👨‍🍳 Cozinha
-</button>
+                <h2>👨‍🍳 Cozinha</h2>
 
-</a>
+                <p>Acompanhe o preparo.</p>
 
+            </a>
 
+            <a href="retirada.html" class="card">
 
-<a href="retirada.html">
+                <h2>🛎 Retirada</h2>
 
-<button>
-🛎 Retirada
-</button>
+                <p>Controle a entrega dos pedidos.</p>
 
-</a>
+            </a>
 
+            <a href="caixa.html" class="card">
 
+                <h2>💳 Caixa</h2>
 
-<a href="caixa.html">
+                <p>Pagamento e histórico.</p>
 
-<button>
-💰 Caixa
-</button>
+            </a>
 
-</a>
+            <a href="relatorios.html" class="card">
 
+                <h2>📊 Relatórios</h2>
 
+                <p>Indicadores da empresa.</p>
 
-<a href="relatorios.html">
+            </a>
 
-<button>
-📊 Relatórios
-</button>
+        </div>
 
-</a>
+        <div style="margin-top:35px;text-align:center;">
 
+            <button onclick="sair()">
+                🚪 Sair do Sistema
+            </button>
 
+        </div>
 
-</div>
+    </div>
 
-
-
-<button onclick="sair()">
-
-Sair
-
-</button>
-
-
-
-</div>
-
-
-
-<script src="../js/index.js"></script>
-
+    <script src="../js/index.js"></script>
 
 </body>
 

@@ -1,105 +1,99 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-<nav class="menu">
-    <a href="dashboard.html">Início</a>
-    <a href="pedidos.html">Pedidos</a>
-    <a href="cozinha.html">Cozinha</a>
-    <a href="retirada.html">Retirada</a>
-    <a href="caixa.html">Caixa</a>
-    <a href="relatorios.html">Relatórios</a>
-    <a href="produtos.html">Produtos</a>
-    <a href="setores.html">Setores</a>
-    <a href="login.html">Sair</a>
-</nav>
-
 <head>
 
-<meta charset="UTF-8">
-<title>Produtos - Bocão</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="../css/style.css">
+    <title>Produtos - Bocão</title>
+
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 
-
 <body>
 
+    <nav class="menu">
 
-<div class="container">
+        <a href="index.html"><button>🏠 Início</button></a>
+        <a href="pedidos.html"><button>📝 Pedidos</button></a>
+        <a href="cozinha.html"><button>👨‍🍳 Cozinha</button></a>
+        <a href="retirada.html"><button>🛎 Retirada</button></a>
+        <a href="caixa.html"><button>💳 Caixa</button></a>
+        <a href="relatorios.html"><button>📊 Relatórios</button></a>
 
+    </nav>
 
-<h1>Cadastro de Produtos</h1>
+    <div class="container fade">
 
+        <h1>📦 Cadastro de Produtos</h1>
 
-<div class="form">
+        <h2>Adicionar novo produto</h2>
 
+        <div class="form">
 
-<input 
-id="nome"
-placeholder="Nome do produto">
+            <label>Nome do Produto</label>
 
+            <input
+                id="nome"
+                placeholder="Ex: X-Bacon">
 
-<input 
-id="descricao"
-placeholder="Descrição">
+            <label>Descrição</label>
 
+            <input
+                id="descricao"
+                placeholder="Descrição do produto">
 
-<input 
-id="categoria"
-placeholder="Categoria">
+            <label>Categoria</label>
 
+            <input
+                id="categoria"
+                placeholder="Ex: Lanches">
 
-<input 
-id="preco"
-type="number"
-placeholder="Preço">
+            <label>Preço</label>
 
+            <input
+                id="preco"
+                type="number"
+                step="0.01"
+                placeholder="0,00">
 
-<button onclick="cadastrarProduto()">
-Cadastrar
-</button>
+            <button onclick="cadastrarProduto()">
+                ➕ Cadastrar Produto
+            </button>
 
+        </div>
 
-</div>
+        <hr>
 
+        <h2>Produtos Cadastrados</h2>
 
+        <table>
 
-<h2>Produtos cadastrados</h2>
+            <thead>
 
+                <tr>
 
-<table>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Preço</th>
+                    <th>Ação</th>
 
+                </tr>
 
-<thead>
+            </thead>
 
-<tr>
+            <tbody id="listaProdutos">
 
-<th>ID</th>
-<th>Nome</th>
-<th>Categoria</th>
-<th>Preço</th>
-<th>Ação</th>
+            </tbody>
 
-</tr>
+        </table>
 
-</thead>
+    </div>
 
-
-<tbody id="listaProdutos">
-
-</tbody>
-
-
-</table>
-
-
-</div>
-
-
-
-<script src="../js/produtos.js"></script>
-
+    <script src="../js/produtos.js"></script>
 
 </body>
 
